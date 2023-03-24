@@ -1,0 +1,49 @@
+<div class="login-container p-5" *ngIf="!loggedIn; else alreadyLogged">
+  <form [formGroup]="loginForm" class="login-form">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Ex. pat@example.com"
+      />
+      <mat-error
+        *ngIf="loginForm.hasError('email') && !loginForm.hasError('required')"
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="loginForm.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="******"
+      />
+      <mat-error
+        *ngIf="
+          loginForm.hasError('password') && !loginForm.hasError('password')
+        "
+      >
+        Please enter a valid password
+      </mat-error>
+      <mat-error *ngIf="loginForm.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="this.loginForm.invalid"
+      (click)="login()"
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
+</div>
+<ng-template #alreadyLogged> Already Logged </ng-template>

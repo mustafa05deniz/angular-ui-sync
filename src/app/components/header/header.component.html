@@ -1,0 +1,17 @@
+<mat-toolbar class="toolbar">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Angular UI Sync</span>
+  <span class="spacer"></span>
+  <button *ngIf="loggedIn" mat-icon-button>
+    <mat-icon>person</mat-icon>
+  </button>
+  <button *ngIf="!loggedIn" mat-icon-button>
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>
