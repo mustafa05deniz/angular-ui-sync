@@ -4,16 +4,19 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialExampleModule } from 'src/material.module';
 import { RouterModule, Routes } from '@angular/router';
-import { Home } from './home/home.component';
 import { CommonModule } from '@angular/common';
+import { UserComponent } from './user/user.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: Home },
+  { path: 'user', component: UserComponent }
+
 ];
 
 @NgModule({
-  declarations: [Home],
+  declarations: [
+    UserComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,4 +29,4 @@ const routes: Routes = [
   providers: [],
   bootstrap: [],
 })
-export class PagesModule {}
+export class PagesModule { }

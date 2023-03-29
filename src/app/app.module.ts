@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { App } from './app';
 import { Header } from './components/header/header.component';
 import { AppRoutingModule } from './app.routing';
-import { PagesModule } from './pages/pages.module';
 import { Footer } from './components/footer/footer.component';
 import { Login } from './pages/login/login.component';
 
@@ -24,10 +23,9 @@ import { Login } from './pages/login/login.component';
     MaterialExampleModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    PagesModule,
   ],
   exports: [MaterialExampleModule],
   providers: [],
   bootstrap: [App],
 })
-export class AppModule {}
+export class AppModule { }

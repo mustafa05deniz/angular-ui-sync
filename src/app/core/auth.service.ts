@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { BroadCastService } from './broadcast.service';
 
-const TOKEN_KEY = 'md-auth-token';
 const USER_KEY = 'md-auth-user';
 
 @Injectable({
@@ -17,10 +16,14 @@ export class AuthService {
   ) {
     this.broadCastService.onMessage.subscribe((payload) => {
       if (payload.type === 'auth/login') {
-        this.router.navigate(['home']);
+        setTimeout(() => {
+          this.router.navigate(['/pages/user']);
+        }, 100);
         this.authentication.next(true);
       } else if (payload.type === 'auth/logOut') {
-        this.router.navigate(['login']);
+        setTimeout(() => {
+          this.router.navigate(['/login'])
+        }, 100);
         this.authentication.next(false);
       }
     });
@@ -30,24 +33,27 @@ export class AuthService {
     window.localStorage.clear();
   }
 
-  public saveToken(token: string): void {
-    window.localStorage.removeItem(TOKEN_KEY);
-    window.localStorage.setItem(TOKEN_KEY, token);
-  }
-
-  public getToken(): string | null {
-    return window.localStorage.getItem(TOKEN_KEY);
-  }
 
   public login(user: any): void {
     this.authentication.next(true);
     window.localStorage.removeItem(USER_KEY);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+    this.router.navigate(['/pages/user'])
+    this.broadCastService.publish({
+      type: 'auth/login',
+      payload: user,
+    });
   }
 
   public logOut(): void {
     this.authentication.next(false);
     window.localStorage.removeItem(USER_KEY);
+    this.router.navigate(['/login'])
+
+    this.broadCastService.publish({
+      type: 'auth/logOut',
+      payload: null,
+    });
   }
 
   public getUser(): any {
@@ -56,6 +62,6 @@ export class AuthService {
       return JSON.parse(user);
     }
 
-    return {};
+    return null;
   }
 }

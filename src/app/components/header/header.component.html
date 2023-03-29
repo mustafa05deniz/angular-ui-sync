@@ -8,10 +8,13 @@
   </button>
   <span>Angular UI Sync</span>
   <span class="spacer"></span>
-  <button *ngIf="loggedIn" mat-icon-button>
+  <span *ngIf="user">{{ user.email }}</span>
+  <button (click)="logOut()" *ngIf="user; else noLogin" mat-icon-button>
     <mat-icon>person</mat-icon>
   </button>
-  <button *ngIf="!loggedIn" mat-icon-button>
-    <mat-icon>login</mat-icon>
-  </button>
+  <ng-template #noLogin>
+    <button (click)="login()" mat-icon-button>
+      <mat-icon>login</mat-icon>
+    </button>
+  </ng-template>
 </mat-toolbar>

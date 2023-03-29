@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <svg
+        class="bd-placeholder-img rounded-circle"
+        width="140"
+        height="140"
+        role="img"
+      >
+        <rect width="100%" height="100%" fill="var(--textColor)"></rect>
+      </svg>
+      <h2 class="fw-normal mt-3">{{ this.user.email }}</h2>
+      <p>Logged In with your {{ this.user.email }}</p>
+      <label>Change Theme</label>
+      <div class="form-check form-switch d-flex justify-content-center mt-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckChecked"
+          (click)="toogleTheme()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

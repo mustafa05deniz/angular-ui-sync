@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { BroadCastService } from 'src/app/core/broadcast.service';
@@ -19,10 +20,12 @@ export class Login {
     private fb: FormBuilder,
     private broadCastService: BroadCastService,
     private authService: AuthService,
-    private cdk: ChangeDetectorRef
+    private cdk: ChangeDetectorRef,
+    private router: Router,
   ) {
     this.authService.authentication.subscribe((res: any) => {
       this.loggedIn = res;
+      this.router.navigate(['/pages/user'])
       this.cdk.detectChanges();
     });
   }
@@ -31,14 +34,14 @@ export class Login {
     if (this.loginForm.invalid) {
       return;
     }
-    this.broadCastService.publish({
-      type: 'auth/login',
-      payload: this.loginForm.value,
-    });
     this.authService.login(this.loginForm.value);
   }
 
   logOut() {
+    this.broadCastService.publish({
+      type: 'auth/logOut',
+      payload: null,
+    });
     this.authService.logOut();
   }
 }
