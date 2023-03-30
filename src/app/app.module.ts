@@ -11,9 +11,10 @@ import { Header } from './components/header/header.component';
 import { AppRoutingModule } from './app.routing';
 import { Footer } from './components/footer/footer.component';
 import { Login } from './pages/login/login.component';
+import { Home } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [App, Header, Footer, Login],
+  declarations: [App, Home, Header, Footer, Login],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
